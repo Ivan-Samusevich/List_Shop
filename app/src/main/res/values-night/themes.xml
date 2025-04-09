@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Listshop" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="colorPrimary">@color/second_black</item>
+        <item name="colorSecondary">@color/red</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorSurface">@color/third_black</item>
+
+        <item name="android:statusBarColor">@color/second_black</item>
+        <item name="android:navigationBarColor">@color/second_black</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+
+        
+        
+        <item name="thumbIcon">@drawable/ic_just_wback</item>
+
+    </style>
+
+    <style name="MyAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/MyDialogButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/MyDialogButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/MyDialogButtonStyle</item>
+    </style>
+
+    <style name="MyDialogButtonStyle" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/red</item>
+        <item name="rippleColor">@color/blue</item>
+    </style>
+</resources>
