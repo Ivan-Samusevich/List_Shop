@@ -41,6 +41,8 @@ dependencies {
     implementation("com.google.android.material:material:1.6.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation(libs.navigation.ui)
+    implementation(libs.javax.mail.api)
+    implementation(libs.javax.activation.api)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

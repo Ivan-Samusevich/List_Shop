@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">listshop</string>
+    <string name="notification_channel_name">Уведомления приложения</string>
+    <string name="notification_channel_description">Канал для уведомлений о действиях</string>
 </resources>
