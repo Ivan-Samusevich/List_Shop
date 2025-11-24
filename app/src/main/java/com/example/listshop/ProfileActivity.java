@@ -18,15 +18,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.IOException;
+import java.util.Properties;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    private DataManager dataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        String[] menuItems = {"Выбор темы", "Настройки", "Обратная связь","Политика конфиденциальности и условия использования", "О нас"};
+        dataManager = new DataManager(this);
+
+        String[] menuItems = {"Настройки", "Обратная связь","Политика конфиденциальности и условия использования", "О нас"};
 
         ListView menuList = findViewById(R.id.menuList);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -42,15 +51,12 @@ public class ProfileActivity extends AppCompatActivity {
                     showThemeSelectionDialog();
                     break;
                 case 1:
-                    openSettings();
-                    break;
-                case 2:
                     sendFeedback();
                     break;
-                case 3:
+                case 2:
                     showPrivacyPolicy();
                     break;
-                case 4:
+                case 3:
                     showAboutDialog();
                     break;
             }
@@ -78,29 +84,30 @@ public class ProfileActivity extends AppCompatActivity {
                 return 0;
             case android.content.res.Configuration.UI_MODE_NIGHT_YES:
                 return 1;
-
         }
         return 0;
     }
     private void applyTheme(int selectedTheme) {
         switch (selectedTheme) {
             case 0:
+                dataManager.saveThemes("light");
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
             case 1:
+                dataManager.saveThemes("night");
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 break;
         }
         recreate();
     }
 
-    private void openSettings() {
-        new MaterialAlertDialogBuilder(this, R.style.MyAlertDialogTheme)
-                .setTitle("Настройки")
-                .setMessage("Вам ничего не нужно настраивать")
-                .setPositiveButton("OK", null)
-                .show();
-    }
+//    private void openSettings() {
+//        new MaterialAlertDialogBuilder(this, R.style.MyAlertDialogTheme)
+//                .setTitle("Настройки")
+//                .setMessage("Вам ничего не нужно настраивать")
+//                .setPositiveButton("OK", null)
+//                .show();
+//    }
 
 
     private void sendFeedback() {
@@ -108,23 +115,43 @@ public class ProfileActivity extends AppCompatActivity {
         builder.setTitle("Оставить отзыв");
 
         LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(32, 16, 32, 16);
 
         final EditText input = new EditText(this);
         input.setHint("Ваш отзыв или предложение");
+        input.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
         layout.addView(input);
         builder.setView(layout);
 
         builder.setPositiveButton("Отправить", (dialog, which) -> {
             String feedback = input.getText().toString();
             if(!feedback.isEmpty()) {
-                //
-                Toast.makeText(this, "Спасибо за отзыв!", Toast.LENGTH_SHORT).show();
+                sendEmailWithIntent(feedback);
+            } else {
+                Toast.makeText(this, "Пожалуйста, введите ваш отзыв", Toast.LENGTH_SHORT).show();
             }
         });
 
         builder.setNegativeButton("Отмена", null);
         builder.show();
+    }
+
+    private void sendEmailWithIntent(String feedback) {
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("message/rfc822");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"samusevich.ivan@list.ru"});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Отзыв о приложении ShopEasy");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, feedback);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Отправить отзыв через:"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this,
+                    "На устройстве не найдено почтовых приложений",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showPrivacyPolicy() {
@@ -204,4 +231,5 @@ public class ProfileActivity extends AppCompatActivity {
         });
         bottomNavigation.setSelectedItemId(R.id.nav_profile);
     }
+
 }
