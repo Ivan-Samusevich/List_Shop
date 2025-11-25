@@ -19,7 +19,7 @@
 
     <EditText
         android:id="@+id/editCreatePassword"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:hint="Укажите пароль"
@@ -27,27 +27,40 @@
         android:textColorHint="#999999"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.772"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCreateUserName" />
 
-    <EditText
-        android:id="@+id/editCreateUserName"
-        android:layout_width="350dp"
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/editCreatePassword"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11"
+        app:srcCompat="@drawable/passicon" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/editCheckPassword"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        app:srcCompat="@drawable/passicon" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="40dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
-        android:hint="Введите имя пользователя"
-        android:inputType="text"
-        android:textColorHint="#999999"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+        app:layout_constraintEnd_toStartOf="@+id/editCreateUserName"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14"
+        app:srcCompat="@drawable/usericon" />
 
     <EditText
         android:id="@+id/editCheckPassword"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:hint="Повторите пароль"
@@ -55,9 +68,23 @@
         android:textColorHint="#999999"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.772"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCreatePassword" />
+
+    <EditText
+        android:id="@+id/editCreateUserName"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:hint="Введите имя пользователя"
+        android:inputType="text"
+        android:textColorHint="#999999"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.772"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
     <Button
         android:id="@+id/Registration"
@@ -89,33 +116,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="40dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/editCreateUserName"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14"
-        app:srcCompat="@drawable/usericon" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="40dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/editCreatePassword"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11"
-        app:srcCompat="@drawable/passicon" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="40dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/editCheckPassword"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8"
-        app:srcCompat="@drawable/passicon" />
 
     <ImageView
         android:id="@+id/imageView14"
