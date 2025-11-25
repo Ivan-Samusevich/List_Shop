@@ -1,35 +1,57 @@
 package com.example.listshop;
 
+import android.app.Dialog;
+import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.InputType;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     private DataManager dataManager;
     private List<ShoppingList> shoppingLists = new ArrayList<>();
     private ShoppingListAdapter adapter;
     private ImageButton deleteListButton;
     private int selectedListPosition = -1;
 
+    private String themes;
+
+    private NotificationHelper notificationHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        notificationHelper = new NotificationHelper(this);
+        sendAppLaunchNotification();
+
         dataManager = new DataManager(this);
         shoppingLists = dataManager.loadLists();
+        themes = dataManager.loadThemes();
+        System.out.println(themes);
+        applyTheme(themes);
 
         RecyclerView recyclerView = findViewById(R.id.listsRecyclerView);
         adapter = new ShoppingListAdapter(shoppingLists, new ShoppingListAdapter.OnListClickListener() {
@@ -94,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Новый список покупок");
 
         final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         input.setHint("Введите название списка");
         builder.setView(input);
 
@@ -108,7 +131,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.setNegativeButton("Отмена", null);
-        builder.show();
+
+        Dialog dialog = builder.create();
+        dialog.setOnShowListener(dialogInterface -> {
+            input.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
+
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.show();
     }
     private void setupBottomNavigation() {
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigationView);
@@ -125,6 +159,26 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomNavigation.setSelectedItemId(R.id.nav_lists);
     }
+    private void applyTheme(String selectedTheme) {
+        switch (selectedTheme) {
+            case "light":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case "night":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+        }
+    }
+
+    private void sendAppLaunchNotification() {
+        String title = "Приложение открыто";
+        String message = "Добро пожаловать в наше приложение!";
+        notificationHelper.sendNotification(title, message);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();

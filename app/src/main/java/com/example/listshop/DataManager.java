@@ -15,6 +15,7 @@ import java.util.List;
 
 public class DataManager {
     private static final String FILE_NAME = "shopping_lists.json";
+    private static final String FILE_NAME_THEMES = "themes.json";
     private Context context;
     private Gson gson = new Gson();
 
@@ -55,6 +56,41 @@ public class DataManager {
             return new ArrayList<>();
         }
     }
+
+    public void saveThemes(String night) {
+        try {
+            String json = gson.toJson(night);
+            FileOutputStream fos = context.openFileOutput(FILE_NAME_THEMES, Context.MODE_PRIVATE);
+            fos.write(json.getBytes(StandardCharsets.UTF_8));
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String loadThemes(){
+        try {
+            File file = new File(context.getFilesDir(), FILE_NAME_THEMES);
+            if (!file.exists()) return "light";
+
+            FileInputStream fis = context.openFileInput(FILE_NAME_THEMES);
+            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+            fis.close();
+
+            Type type = new TypeToken<String>(){}.getType();
+            return gson.fromJson(sb.toString(), type);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "light";
+        }
+    }
+
 
     public boolean clearData() {
         File file = new File(context.getFilesDir(), FILE_NAME);

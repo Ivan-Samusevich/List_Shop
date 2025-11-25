@@ -16,6 +16,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -31,8 +35,10 @@ android {
     }
 }
 
-dependencies {
 
+dependencies {
+    implementation ("com.yandex.android:mobileads:5.7.0")
+    implementation("com.google.android.gms:play-services-ads:21.0.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -41,6 +47,8 @@ dependencies {
     implementation("com.google.android.material:material:1.6.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation(libs.navigation.ui)
+    implementation(libs.javax.mail.api)
+    implementation(libs.javax.activation.api)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
