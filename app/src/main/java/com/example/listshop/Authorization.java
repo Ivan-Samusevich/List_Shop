@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -11,13 +12,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.yandex.mobile.ads.banner.AdSize;
+import com.yandex.mobile.ads.banner.BannerAdEventListener;
+import com.yandex.mobile.ads.banner.BannerAdView;
+import com.yandex.mobile.ads.common.AdRequest;
+import com.yandex.mobile.ads.common.AdRequestError;
+import com.yandex.mobile.ads.common.ImpressionData;
+import com.yandex.mobile.ads.common.MobileAds;
 
 public class Authorization extends AppCompatActivity {
     private EditText editUsername, editPassword;
     private ImageView imageYandex;
     private Button registration, enter;
+
+    private BannerAdView mAdView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -31,6 +43,10 @@ public class Authorization extends AppCompatActivity {
         imageYandex = findViewById(R.id.imageYandex);
         enter = findViewById(R.id.button_Enter);
         registration = findViewById(R.id.buttonRegistration);
+
+        mAdView = findViewById(R.id.banner);
+        initializeYandexAds();
+        showYandexAd();
 
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +88,63 @@ public class Authorization extends AppCompatActivity {
             }
         });
     }
+    private void showYandexAd() {
+        if (mAdView != null) {
+            // Устанавливаем размер баннера
+            mAdView.setAdSize(AdSize.BANNER_320x50);
+
+            // Устанавливаем ваш Ad Unit ID
+            mAdView.setAdUnitId("R-M-17689147-1");
+
+            // Создаем запрос на рекламу
+            final AdRequest adRequest = new AdRequest.Builder().build();
+
+            // Устанавливаем слушатель событий
+            mAdView.setBannerAdEventListener(new BannerAdEventListener() {
+                @Override
+                public void onAdLoaded() {
+                    Log.d("YandexAds", "Ad loaded successfully");
+                    mAdView.setVisibility(android.view.View.VISIBLE);
+                }
+
+                @Override
+                public void onAdFailedToLoad(@NonNull AdRequestError adRequestError) {
+                    Log.e("YandexAds", "Ad failed to load: " + adRequestError.getDescription());
+                    mAdView.setVisibility(android.view.View.GONE);
+                }
+
+                @Override
+                public void onAdClicked() {
+                    Log.d("YandexAds", "Ad clicked");
+                }
+
+                @Override
+                public void onLeftApplication() {
+                    Log.d("YandexAds", "Left application");
+                }
+
+                @Override
+                public void onReturnedToApplication() {
+                    Log.d("YandexAds", "Returned to application");
+                }
+
+                @Override
+                public void onImpression(@NonNull ImpressionData impressionData) {
+                    Log.d("YandexAds", "Impression recorded");
+                }
+            });
+
+
+            mAdView.loadAd(adRequest);
+        }
+    }
+
+    private void initializeYandexAds() {
+        MobileAds.initialize(this, () -> {
+            Log.d("YandexAds", "SDK initialized successfully");
+        });
+    }
+
 
     private void openWebsite(){
         try {
