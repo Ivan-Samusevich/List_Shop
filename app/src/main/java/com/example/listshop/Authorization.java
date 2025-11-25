@@ -44,6 +44,7 @@ public class Authorization extends AppCompatActivity {
                 if(editUsername.getText().toString().equals("1") && editPassword.getText().toString().equals("1")){
                     Intent intent = new Intent(Authorization.this, MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
                 else{
                     editPassword.setText("");
@@ -60,7 +61,7 @@ public class Authorization extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Authorization.this, Registration.class);
                 startActivity(intent);
-                //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); Попробовать сделать анимацию перехода
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
