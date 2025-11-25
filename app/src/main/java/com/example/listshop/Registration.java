@@ -51,6 +51,7 @@ public class Registration extends AppCompatActivity {
                         public void run() {
                             Intent intent = new Intent(Registration.this, Authorization.class);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                             finish();
                         }
                     }, 1000);
@@ -64,6 +65,7 @@ public class Registration extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Registration.this, Authorization.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
             }
         });
