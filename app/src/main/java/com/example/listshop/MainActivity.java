@@ -1,10 +1,13 @@
 package com.example.listshop;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -195,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     private void sendAppLaunchNotification() {
         String title = "Приложение открыто";
         String message = "Добро пожаловать в наше приложение!";
