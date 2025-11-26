@@ -29,9 +29,6 @@ public class ShoppingList {
 
     public void addItem(String item) {
         items.add(item);
-        String subscribe = dataManager.loadSub();
-        if(items.size() > 5 && subscribe.equals("no")){
-        }
         purchasedStatus.add(false);
     }
 

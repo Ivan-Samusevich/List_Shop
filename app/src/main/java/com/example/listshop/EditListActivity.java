@@ -12,9 +12,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
 import java.util.ArrayList;
 
 public class EditListActivity extends AppCompatActivity {
@@ -53,7 +50,6 @@ public class EditListActivity extends AppCompatActivity {
 
 
         addButton.setOnClickListener(v -> {
-
             String newItem = ((EditText)findViewById(R.id.itemEditText)).getText().toString();
             if (!newItem.isEmpty()) {
                 currentList.addItem(newItem);

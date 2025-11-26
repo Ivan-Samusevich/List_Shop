@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private NotificationHelper notificationHelper;
 
+    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -204,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
         String message = "Добро пожаловать в наше приложение!";
         notificationHelper.sendNotification(title, message);
     }
-
     @Override
     protected void onResume() {
         super.onResume();
