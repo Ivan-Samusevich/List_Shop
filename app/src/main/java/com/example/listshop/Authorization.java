@@ -26,7 +26,7 @@ import com.yandex.mobile.ads.common.MobileAds;
 
 public class Authorization extends AppCompatActivity {
     private EditText editUsername, editPassword;
-    private ImageView imageYandex;
+    private ImageView imageView;
     private Button registration, enter;
 
     private BannerAdView mAdView;
@@ -40,9 +40,10 @@ public class Authorization extends AppCompatActivity {
 
         editUsername = findViewById(R.id.editUserName);
         editPassword = findViewById(R.id.editPassword);
-        imageYandex = findViewById(R.id.imageYandex);
-        enter = findViewById(R.id.button_Enter);
+
+        enter = findViewById(R.id.buttonEnter);
         registration = findViewById(R.id.buttonRegistration);
+        imageView = findViewById(R.id.imageView);
 
         mAdView = findViewById(R.id.banner);
         initializeYandexAds();
@@ -81,7 +82,7 @@ public class Authorization extends AppCompatActivity {
         });
 
 
-        imageYandex.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openWebsite();
