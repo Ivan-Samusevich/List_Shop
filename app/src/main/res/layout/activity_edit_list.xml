@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimary"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="?attr/thumbIcon"
+            android:background="?attr/colorPrimary"
+            android:contentDescription="Назад"
+            android:padding="8dp"/>
+
+        <TextView
+            android:textColor="?attr/colorOnSurface"
+            android:id="@+id/listTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/itemEditText"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:padding="8dp"
+            android:hint="Добавить новый товар"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addItemButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/addItemButton"
+            android:layout_width="75dp"
+            android:layout_height="77dp"
+            android:textColor="@color/white"
+            android:backgroundTint="?attr/colorSecondary"
+            android:padding="0dp"
+            android:text="Добавить"
+            android:layout_marginEnd="3dp"
+            app:layout_constraintEnd_toStartOf="@id/deleteItemButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <Button
+            android:id="@+id/deleteItemButton"
+            android:layout_width="75dp"
+            android:layout_height="77dp"
+            android:textColor="@color/white"
+            android:backgroundTint="?attr/colorSecondary"
+            android:padding="0dp"
+            android:text="Удалить"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
