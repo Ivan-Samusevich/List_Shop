@@ -6,19 +6,45 @@
     android:layout_height="match_parent">
 
     <!-- Контейнер для полей ввода логина и пароля -->
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="411dp"
+        android:layout_height="95dp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/signature" />
+
+    <!-- Остальные элементы остаются без изменений -->
+
+    <Button
+        android:id="@+id/buttonEnter"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="32dp"
+        android:text="Войти"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginCard" />
+
     <LinearLayout
         android:id="@+id/loginCard"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_corner_background"
-        android:orientation="vertical"
         android:elevation="4dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <!-- Строка с логином -->
+
+        <!-- Разделительная линия -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,13 +80,12 @@
 
         </LinearLayout>
 
-        <!-- Разделительная линия -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#E0E0E0"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp"
+            android:background="#E0E0E0" />
 
         <!-- Строка с паролем -->
         <LinearLayout
@@ -99,23 +124,12 @@
 
     </LinearLayout>
 
-    <!-- Остальные элементы остаются без изменений -->
-    <Button
-        android:id="@+id/buttonEnter"
-        android:layout_width="150dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:text="Войти"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginCard" />
-
     <Button
         android:id="@+id/buttonRegistration"
         android:layout_width="150dp"
         android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="52dp"
         android:text="Регистрация"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginCard" />
@@ -123,7 +137,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="383dp"
-        android:layout_height="168dp"
+        android:layout_height="100dp"
         android:layout_marginTop="108dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
