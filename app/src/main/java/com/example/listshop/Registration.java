@@ -34,12 +34,15 @@ public class Registration extends AppCompatActivity {
 
     DataManager dataManager;
 
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.registration);
+        dataManager = new DataManager(getApplicationContext());
 
         userName = findViewById(R.id.editCreateUserName);
         password = findViewById(R.id.editCreatePassword);
@@ -54,6 +57,8 @@ public class Registration extends AppCompatActivity {
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                User user = new User();
+
                 if (userName.getText().toString().isEmpty()) {
                     userName.setError("Поле должно быть заполнено!");
                 }
@@ -64,13 +69,10 @@ public class Registration extends AppCompatActivity {
                     checkPassword.setError("Пароли не совпадают!");
                 }
                 else{
-                    User user = new User();
                     user.setUsername(userName.getText().toString());
                     user.setPassword(password.getText().toString());
+                    dataManager.saveUser(user);
 
-                    Log.d("APP", "Перед вызовом saveUser");
-                    //dataManager.saveUser(user);
-                    Log.d("APP", "После вызова saveUser");
                     Snackbar.make(view, "Регистрация прошла успешна!", Snackbar.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override

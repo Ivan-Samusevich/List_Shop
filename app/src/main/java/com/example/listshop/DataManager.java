@@ -165,10 +165,9 @@ public class DataManager {
 
     public void saveUser(User user) {
         try {
-            FileOutputStream fos = context.openFileOutput("user.json", Context.MODE_PRIVATE);
-            OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
-            osw.write(gson.toJson(user));
-            osw.close();
+            String json = gson.toJson(user);
+            FileOutputStream fos = context.openFileOutput(FILE_NAME_USER, Context.MODE_PRIVATE);
+            fos.write(json.getBytes(StandardCharsets.UTF_8));
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();

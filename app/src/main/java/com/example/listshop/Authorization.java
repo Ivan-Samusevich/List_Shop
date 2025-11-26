@@ -42,11 +42,13 @@ public class Authorization extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        dataManager = new DataManager(getApplicationContext());
+
         setContentView(R.layout.autorization);
 
         editUsername = findViewById(R.id.editUserName);
         editPassword = findViewById(R.id.editPassword);
-        enter = findViewById(R.id.button_Enter);
+        enter = findViewById(R.id.buttonEnter);
         registration = findViewById(R.id.buttonRegistration);
 
 
@@ -54,17 +56,18 @@ public class Authorization extends AppCompatActivity {
         initializeYandexAds();
         showYandexAd();
 
+
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //User user = dataManager.loadUser();
+                User user = dataManager.loadUser();
                 if(editUsername.getText().toString().isEmpty()){
                     editUsername.setError("Поле должно быть заполнено!");
                 }
-                if(editPassword.getText().toString().length() < 8){
+                else if(editPassword.getText().toString().length() < 8){
                     editPassword.setError("Длина пароля не менее 8 символов!");
                 }
-                if(editUsername.getText().toString().equals("1") && editPassword.getText().toString().equals("1")){
+                else if(editUsername.getText().toString().equals(user.getUsername()) && editPassword.getText().toString().equals(user.getPassword())){
                     Intent intent = new Intent(Authorization.this, MainActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
